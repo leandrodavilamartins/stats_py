@@ -126,3 +126,37 @@ class Poisson(Discrete):
         result = math.pow(self.mean,value) * math.exp(0 - self.mean) / self.factorial[value]
         return result
     
+class Binomial(Discrete):
+    def __init__(self,assays,p_success,p_failure):
+        super().__init__()
+        self.assays = int(assays)
+        self.p_success = float(p_success)
+        self.p_failure = float(p_failure)
+    
+    def probability(self,value):
+        result = self.factorial[self.assays] / (self.factorial[value] * self.factorial[self.assays - int(value)]) * math.pow(self.p_success,int(value)) * math.pow(self.p_failure, self.assays - value)
+        return result
+
+class Geometric(Discrete):
+    def __init__(self,p_success):
+        super().__init__()
+        self.p_success = p_success
+
+    def probability(self,value):
+        result = math.pow(1 - self.p_success,value-1) * self.p_success
+        return result
+
+class Hyper(Discrete):
+    def __init__(self,assays,n_elements,n_success):
+        super().__init__()
+        self.assays = int(assays)
+        self.elements = int(n_elements)
+        self.success = int(n_success)
+    
+    def probability(self,value):
+        r = self.success 
+        x = int(value)
+        N = self.elements
+        n = self.assays
+        result = (self.factorial[r] /(self.factorial[x] * self.factorial[r-x])) * ((self.factorial[N-r]) * self.factorial[(N-r)-(n-x)]) / ((self.factorial[N] / (self.factorial[n] * self.factorial[N-n])))
+        return result
