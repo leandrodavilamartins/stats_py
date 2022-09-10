@@ -1,4 +1,4 @@
-from classes import Data, Distribution, Discrete, Poisson
+from classes import Data, Distribution, Discrete, Poisson,ABC
 
 if __name__=="__main__":
     data = [0,2,3,4,4,4,1,5,7,8] # maybe you should use a numpy array ? 
@@ -21,6 +21,7 @@ if __name__=="__main__":
     #discrete.probability();
     poisson01 = Poisson(6)
     print(poisson01.probability(6))
-
+    test = isinstance(poisson01, ABC)
+    print(test)
     
   
